@@ -1,0 +1,15 @@
+{
+  "name": "storybook_test_download_components",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@luisenriquechavarriavazquez/my-button": "^1.0.3",
+    "@luisenriquechavarriavazquez/my-text-box": "^1.0.3"
+  }
+}
