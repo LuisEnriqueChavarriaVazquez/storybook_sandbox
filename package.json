@@ -10,7 +10,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@luisenriquechavarriavazquez/currency-format": "^1.0.1",
+    "@luisenriquechavarriavazquez/currency-format": "^1.1.0",
     "@luisenriquechavarriavazquez/my-button": "^1.0.3",
     "@luisenriquechavarriavazquez/my-text-box": "^1.0.3"
   },
