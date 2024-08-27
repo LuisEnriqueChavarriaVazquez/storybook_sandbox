@@ -41,6 +41,20 @@
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
 
+        .cardWide {
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: box-shadow 0.3s ease;
+            width: 1200px;
+        }
+
+        .cardWide:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
         h1 {
             text-align: center;
             margin-bottom: 20px;
@@ -57,7 +71,46 @@
 </head>
 
 <body>
-    <h1>Convertidor de divisas</h1>
+    <h1>Stepper</h1>
+
+    <div class="cardWide">
+        <btp-stepper steps="10" stepsCharacter="upper" instruction='[
+        { "text": "Primero, haz esto." },
+        { "text": "Luego, haz aquello." },
+        { "text": "Después, revisa esto." },
+        { "text": "Finalmente, termina el proceso." }]' prevButtonText="Anterior" nextButtonText="Siguiente"
+            finishButtonText="Finalizar"></btp-stepper>
+    </div>
+
+    <div class="cardWide">
+        <btp-stepper steps="7" stepsCharacter="lower" instruction='[
+        { "text": "Primero, haz esto." },
+        { "text": "Luego, haz aquello." },
+        { "text": "Después, revisa esto." },
+        { "text": "Finalmente, termina el proceso." }]' prevButtonText="Anterior personalizado"
+            nextButtonText="Siguiente personalizado" finishButtonText="Finalizar personalizado"></btp-stepper>
+    </div>
+
+    <div class="cardWide">
+        <btp-stepper steps="5" stepsCharacter="number" instruction='[
+        { "text": "Primero, haz esto." },
+        { "text": "Luego, haz aquello." },
+        { "text": "Después, revisa esto." },
+        { "text": "Finalmente, termina el proceso." }]' prevButtonText="Anterior personalizado"
+            nextButtonText="Siguiente personalizado" finishButtonText="Finalizar personalizado"></btp-stepper>
+    </div>
+
+    <div class="cardWide">
+        <btp-stepper steps="3" stepsCharacter="number" instruction='[
+        { "text": "Primero, haz esto." },
+        { "text": "Luego, haz aquello." },
+        { "text": "Después, revisa esto." },
+        { "text": "Finalmente, termina el proceso." }]' prevButtonText="Anterior personalizado"
+            nextButtonText="Siguiente personalizado" finishButtonText="Finalizar personalizado"></btp-stepper>
+    </div>
+
+
+    <h1>Currency converter</h1>
 
     <div class="grid-container">
         <div class="card">
@@ -97,7 +150,51 @@
 
         <div class="card">
             <h3>Colombia</h3>
-            <currency-converter locale="CO" amount="12345347346.789"></currency-converter>
+            <currency-converter locale="CO" amount="3500.789"></currency-converter>
+        </div>
+    </div>
+
+    <h1>Currency converter</h1>
+
+    <div class="grid-container">
+        <div class="card">
+            <h3>Estados Unidos</h3>
+            <currency-converter locale="US" amount="123456789.99"></currency-converter>
+        </div>
+
+        <div class="card">
+            <h3>Ecuador</h3>
+            <currency-converter locale="EC" amount="1000000.12"></currency-converter>
+        </div>
+
+        <div class="card">
+            <h3>Perú</h3>
+            <currency-converter locale="PE" amount="2345678901.56"></currency-converter>
+        </div>
+
+        <div class="card">
+            <h3>México</h3>
+            <currency-converter locale="MX" amount="7654321098.34"></currency-converter>
+        </div>
+
+        <div class="card">
+            <h3>Chile</h3>
+            <currency-converter locale="CL" amount="3456789123.89"></currency-converter>
+        </div>
+
+        <div class="card">
+            <h3>España</h3>
+            <currency-converter locale="ES" amount="1234567890.67"></currency-converter>
+        </div>
+
+        <div class="card">
+            <h3>Argentina</h3>
+            <currency-converter locale="AR" amount="9876543210.99"></currency-converter>
+        </div>
+
+        <div class="card">
+            <h3>Colombia</h3>
+            <currency-converter locale="CO" amount="123456789012.34"></currency-converter>
         </div>
     </div>
 
