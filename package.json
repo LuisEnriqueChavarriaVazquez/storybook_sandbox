@@ -10,7 +10,11 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@luisenriquechavarriavazquez/bpt-stepper": "^1.1.0",
+    "@luisenriquechavarriavazquez/bpt-button-modal": "^1.0.1",
+    "@luisenriquechavarriavazquez/bpt-currency-format": "^1.2.1",
+    "@luisenriquechavarriavazquez/bpt-modal": "^1.0.1",
+    "@luisenriquechavarriavazquez/bpt-sidebar": "^1.2.1",
+    "@luisenriquechavarriavazquez/bpt-stepper": "^1.1.1",
     "@luisenriquechavarriavazquez/currency-format": "^1.2.0",
     "@luisenriquechavarriavazquez/my-button": "^1.0.3",
     "@luisenriquechavarriavazquez/my-text-box": "^1.0.3"

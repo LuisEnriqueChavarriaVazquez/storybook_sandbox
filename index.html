@@ -5,19 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Currency Converter</title>
-    <script type="module" src="./dist/bundle.js"></script>
+    <script defer src="./dist/bundle.js"></script>
     <style>
         * {
             margin: 0;
             font-family: Arial, sans-serif;
+            box-sizing: border-box;
         }
 
         body {
-            padding: 20px;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             background-color: #f5f5f5;
+            margin-left: 250px;
+            /* Espacio para el sidebar */
+            padding: 20px;
         }
 
         .grid-container {
@@ -25,10 +26,9 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
             width: 100%;
-            max-width: 1200px;
         }
 
-        .card {
+        .card, .cardWide {
             background-color: #fff;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
@@ -37,27 +37,18 @@
             transition: box-shadow 0.3s ease;
         }
 
-        .card:hover {
+        .card:hover, .cardWide:hover {
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
 
         .cardWide {
-            background-color: #fff;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            padding: 20px;
-            text-align: center;
-            transition: box-shadow 0.3s ease;
-            width: 1200px;
-        }
-
-        .cardWide:hover {
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            margin-bottom: 20px;
         }
 
         h1 {
             text-align: center;
-            margin-bottom: 20px;
+            margin: 20px 0;
             font-size: 2em;
             color: #333;
         }
@@ -67,137 +58,168 @@
             margin-bottom: 10px;
             color: #555;
         }
+
+        section {
+            display: none; /* Por defecto todas las secciones están ocultas */
+            width: calc(100vw - 250px - 40px);
+            height: calc(100vh);
+            padding: 20px;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        section.active {
+            display: grid; /* Se mostrará solo la sección activa */
+            justify-content: center;
+            align-items: center;
+        }
     </style>
 </head>
 
 <body>
-    <h1>Stepper</h1>
+    <!-- Implementación del Sidebar -->
+    <bpt-sidebar items='[
+        { "name": "Modal", "link": "#modal-section" },
+        { "name": "Stepper (in progress)", "link": "#stepper-section" },
+        { "name": "Currency Converter (thousands)", "link": "#currency-converter-1" },
+        { "name": "Currency Converter (millions)", "link": "#currency-converter-2" }
+    ]'></bpt-sidebar>
 
-    <div class="cardWide">
-        <btp-stepper steps="10" stepsCharacter="upper" instruction='[
-        { "text": "Primero, haz esto." },
-        { "text": "Luego, haz aquello." },
-        { "text": "Después, revisa esto." },
-        { "text": "Finalmente, termina el proceso." }]' prevButtonText="Anterior" nextButtonText="Siguiente"
-            finishButtonText="Finalizar"></btp-stepper>
-    </div>
+    <section id="modal-section">
+        <h1>Modal</h1>
+        <!-- Botón para abrir el modal -->
+        <bpt-button-modal modalTrigger="exampleModal">Abrir Modal</bpt-button-modal>
 
-    <div class="cardWide">
-        <btp-stepper steps="7" stepsCharacter="lower" instruction='[
-        { "text": "Primero, haz esto." },
-        { "text": "Luego, haz aquello." },
-        { "text": "Después, revisa esto." },
-        { "text": "Finalmente, termina el proceso." }]' prevButtonText="Anterior personalizado"
-            nextButtonText="Siguiente personalizado" finishButtonText="Finalizar personalizado"></btp-stepper>
-    </div>
+        <!-- Web Component del Modal -->
+        <bpt-modal modalTriggerName="exampleModal" modal-title="Título del Modal" modal-content="
+            <div class='card'>
+                <h3>Estados Unidos</h3>
+                <bpt-currency-converter locale='US' amount='123456.789'></bpt-currency-converter>
+            </div>">
+            <p>Este componente fue pasado por medio de modal-content</p>
+        </bpt-modal>
+    </section>
 
-    <div class="cardWide">
-        <btp-stepper steps="5" stepsCharacter="number" instruction='[
-        { "text": "Primero, haz esto." },
-        { "text": "Luego, haz aquello." },
-        { "text": "Después, revisa esto." },
-        { "text": "Finalmente, termina el proceso." }]' prevButtonText="Anterior personalizado"
-            nextButtonText="Siguiente personalizado" finishButtonText="Finalizar personalizado"></btp-stepper>
-    </div>
-
-    <div class="cardWide">
-        <btp-stepper steps="3" stepsCharacter="number" instruction='[
-        { "text": "Primero, haz esto." },
-        { "text": "Luego, haz aquello." },
-        { "text": "Después, revisa esto." },
-        { "text": "Finalmente, termina el proceso." }]' prevButtonText="Anterior personalizado"
-            nextButtonText="Siguiente personalizado" finishButtonText="Finalizar personalizado"></btp-stepper>
-    </div>
-
-
-    <h1>Currency converter</h1>
-
-    <div class="grid-container">
-        <div class="card">
-            <h3>Estados Unidos</h3>
-            <currency-converter locale="US" amount="123456.789"></currency-converter>
+    <section id="stepper-section">
+        <h1>Stepper</h1>
+        <div class="cardWide">
+            <btp-stepper steps="10" stepsCharacter="upper" instruction='[
+            { "text": "Primero, haz esto." },
+            { "text": "Luego, haz aquello." },
+            { "text": "Después, revisa esto." },
+            { "text": "Finalmente, termina el proceso." }]' prevButtonText="Anterior" nextButtonText="Siguiente"
+                finishButtonText="Finalizar"></btp-stepper>
         </div>
 
-        <div class="card">
-            <h3>Ecuador</h3>
-            <currency-converter locale="EC" amount="123456.789"></currency-converter>
+        <div class="cardWide">
+            <btp-stepper steps="7" stepsCharacter="lower" instruction='[
+            { "text": "Primero, haz esto." },
+            { "text": "Luego, haz aquello." },
+            { "text": "Después, revisa esto." },
+            { "text": "Finalmente, termina el proceso." }]' prevButtonText="Anterior personalizado"
+                nextButtonText="Siguiente personalizado" finishButtonText="Finalizar personalizado"></btp-stepper>
         </div>
 
-        <div class="card">
-            <h3>Perú</h3>
-            <currency-converter locale="PE" amount="123456.789"></currency-converter>
+        <div class="cardWide">
+            <btp-stepper steps="5" stepsCharacter="number" instruction='[
+            { "text": "Primero, haz esto." },
+            { "text": "Luego, haz aquello." },
+            { "text": "Después, revisa esto." },
+            { "text": "Finalmente, termina el proceso." }]' prevButtonText="Anterior personalizado"
+                nextButtonText="Siguiente personalizado" finishButtonText="Finalizar personalizado"></btp-stepper>
         </div>
 
-        <div class="card">
-            <h3>México</h3>
-            <currency-converter locale="MX" amount="123456.789"></currency-converter>
+        <div class="cardWide">
+            <btp-stepper steps="3" stepsCharacter="number" instruction='[
+            { "text": "Primero, haz esto." },
+            { "text": "Luego, haz aquello." },
+            { "text": "Después, revisa esto." },
+            { "text": "Finalmente, termina el proceso." }]' prevButtonText="Anterior personalizado"
+                nextButtonText="Siguiente personalizado" finishButtonText="Finalizar personalizado"></btp-stepper>
         </div>
+    </section>
 
-        <div class="card">
-            <h3>Chile</h3>
-            <currency-converter locale="CL" amount="123456.789"></currency-converter>
+    <section id="currency-converter-1">
+        <h1>Currency converter 1</h1>
+        <div class="grid-container">
+            <div class="card">
+                <h3>Estados Unidos</h3>
+                <bpt-currency-converter locale="US" amount="123456.789"></bpt-currency-converter>
+            </div>
+            <div class="card">
+                <h3>Ecuador</h3>
+                <bpt-currency-converter locale="EC" amount="123456.789"></bpt-currency-converter>
+            </div>
+            <div class="card">
+                <h3>Perú</h3>
+                <bpt-currency-converter locale="PE" amount="123456.789"></bpt-currency-converter>
+            </div>
+            <div class="card">
+                <h3>México</h3>
+                <bpt-currency-converter locale="MX" amount="123456.789"></bpt-currency-converter>
+            </div>
+            <div class="card">
+                <h3>Chile</h3>
+                <bpt-currency-converter locale="CL" amount="123456.789"></bpt-currency-converter>
+            </div>
+            <div class="card">
+                <h3>España</h3>
+                <bpt-currency-converter locale="ES" amount="123456.789"></bpt-currency-converter>
+            </div>
+            <div class="card">
+                <h3>Argentina</h3>
+                <bpt-currency-converter locale="AR" amount="123456.789"></bpt-currency-converter>
+            </div>
+            <div class="card">
+                <h3>Colombia</h3>
+                <bpt-currency-converter locale="CO" amount="3500.789"></bpt-currency-converter>
+            </div>
         </div>
+    </section>
 
-        <div class="card">
-            <h3>España</h3>
-            <currency-converter locale="ES" amount="123456.789"></currency-converter>
+    <section id="currency-converter-2">
+        <h1>Currency converter 2</h1>
+        <div class="grid-container">
+            <div class="card">
+                <h3>Estados Unidos</h3>
+                <bpt-currency-converter locale="US" amount="123456789.99"></bpt-currency-converter>
+            </div>
+            <div class="card">
+                <h3>Ecuador</h3>
+                <bpt-currency-converter locale="EC" amount="1000000.12"></bpt-currency-converter>
+            </div>
+            <div class="card">
+                <h3>Perú</h3>
+                <bpt-currency-converter locale="PE" amount="2345678901.56"></bpt-currency-converter>
+            </div>
+            <div class="card">
+                <h3>México</h3>
+                <bpt-currency-converter locale="MX" amount="7654321098.34"></bpt-currency-converter>
+            </div>
+            <div class="card">
+                <h3>Chile</h3>
+                <bpt-currency-converter locale="CL" amount="3456789123.89"></bpt-currency-converter>
+            </div>
+            <div class="card">
+                <h3>España</h3>
+                <bpt-currency-converter locale="ES" amount="1234567890.67"></bpt-currency-converter>
+            </div>
+            <div class="card">
+                <h3>Argentina</h3>
+                <bpt-currency-converter locale="AR" amount="9876543210.99"></bpt-currency-converter>
+            </div>
+            <div class="card">
+                <h3>Colombia</h3>
+                <bpt-currency-converter locale="CO" amount="123456789012.34"></bpt-currency-converter>
+            </div>
         </div>
+    </section>
 
-        <div class="card">
-            <h3>Argentina</h3>
-            <currency-converter locale="AR" amount="123456.789"></currency-converter>
-        </div>
-
-        <div class="card">
-            <h3>Colombia</h3>
-            <currency-converter locale="CO" amount="3500.789"></currency-converter>
-        </div>
-    </div>
-
-    <h1>Currency converter</h1>
-
-    <div class="grid-container">
-        <div class="card">
-            <h3>Estados Unidos</h3>
-            <currency-converter locale="US" amount="123456789.99"></currency-converter>
-        </div>
-
-        <div class="card">
-            <h3>Ecuador</h3>
-            <currency-converter locale="EC" amount="1000000.12"></currency-converter>
-        </div>
-
-        <div class="card">
-            <h3>Perú</h3>
-            <currency-converter locale="PE" amount="2345678901.56"></currency-converter>
-        </div>
-
-        <div class="card">
-            <h3>México</h3>
-            <currency-converter locale="MX" amount="7654321098.34"></currency-converter>
-        </div>
-
-        <div class="card">
-            <h3>Chile</h3>
-            <currency-converter locale="CL" amount="3456789123.89"></currency-converter>
-        </div>
-
-        <div class="card">
-            <h3>España</h3>
-            <currency-converter locale="ES" amount="1234567890.67"></currency-converter>
-        </div>
-
-        <div class="card">
-            <h3>Argentina</h3>
-            <currency-converter locale="AR" amount="9876543210.99"></currency-converter>
-        </div>
-
-        <div class="card">
-            <h3>Colombia</h3>
-            <currency-converter locale="CO" amount="123456789012.34"></currency-converter>
-        </div>
-    </div>
-
+    <script>
+        // Mostrar la primera sección por defecto
+        document.querySelector("section").classList.add("active");
+    </script>
 </body>
 
 </html>
