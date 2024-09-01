@@ -4,12 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Currency Converter</title>
-    <script defer src="./dist/bundle.js"></script>
+    <title>SANDBOX</title>
+    <!-- Import Material Symbols from Google CDN -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@100..1000&display=swap" rel="stylesheet">
+
+    <script defer src="./node_modules/@luisenriquechavarriavazquez/bpt-sidebar/index.js"></script>
+
+    <script defer src="./node_modules/@luisenriquechavarriavazquez/bpt-badge/index.js"></script>
+    <script defer src="./node_modules/@luisenriquechavarriavazquez/bpt-button-modal/index.js"></script>
+    <script defer src="./node_modules/@luisenriquechavarriavazquez/bpt-button/index.js"></script>
+    <script defer src="./node_modules/@luisenriquechavarriavazquez/bpt-card-basic/index.js"></script>
+    <script defer src="./node_modules/@luisenriquechavarriavazquez/bpt-card-image/index.js"></script> <!-- Incluye el nuevo sidebar -->
+    <script defer src="./node_modules/@luisenriquechavarriavazquez/bpt-chips/index.js"></script>
+    <script defer src="./node_modules/@luisenriquechavarriavazquez/bpt-currency-format/index.js"></script>
+    <script defer src="./node_modules/@luisenriquechavarriavazquez/bpt-icon-button/index.js"></script>
+    <script defer src="./node_modules/@luisenriquechavarriavazquez/bpt-modal/index.js"></script>
+    <script defer src="./node_modules/@luisenriquechavarriavazquez/bpt-sidebar/index.js"></script>
+    <script defer src="./node_modules/@luisenriquechavarriavazquez/bpt-stepper/index.js"></script>
+
+    <!-- <script defer src="./dist/bundle.js"></script> -->
     <style>
         * {
             margin: 0;
-            font-family: Arial, sans-serif;
+            font-family: "Roboto Flex", Arial, sans-serif;
             box-sizing: border-box;
         }
 
@@ -28,7 +47,8 @@
             width: 100%;
         }
 
-        .card, .cardWide {
+        .card,
+        .cardWide {
             background-color: #fff;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
@@ -37,31 +57,72 @@
             transition: box-shadow 0.3s ease;
         }
 
-        .card:hover, .cardWide:hover {
+        .card:hover,
+        .cardWide:hover {
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
 
         .cardWide {
             width: 100%;
             margin-bottom: 20px;
+            padding: 10px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            flex-direction: column;
         }
 
         h1 {
-            text-align: center;
-            margin: 20px 0;
-            font-size: 2em;
-            color: #333;
+            font-family: 'Roboto Flex', sans-serif;
+            text-align: left;
+            margin: 0 0 16px 0;
+            font-size: 3rem;
+            /* Tamaño de fuente más grande */
+            line-height: 3.5rem;
+            /* Altura de línea para un buen espaciado vertical */
+            font-weight: 400;
+            /* Peso de fuente regular */
+            color: #1F1F1F;
+            /* Color oscuro para mejor legibilidad */
+            letter-spacing: -0.5px;
+            /* Ligero espaciado negativo para una apariencia más compacta */
         }
 
-        h3 {
-            font-size: 1.2em;
-            margin-bottom: 10px;
-            color: #555;
+        h2 {
+            font-family: 'Roboto Flex', sans-serif;
+            text-align: left;
+            margin: 0 0 12px 0;
+            font-size: 2rem;
+            /* Tamaño de fuente adecuado para subencabezados */
+            line-height: 2.5rem;
+            /* Altura de línea para un buen espaciado vertical */
+            font-weight: 500;
+            /* Peso de fuente medio para resaltar pero no sobrecargar */
+            color: #424242;
+            /* Color ligeramente más claro que el h1 */
+            letter-spacing: 0;
+            /* Sin espaciado adicional */
+        }
+
+        .mdc-typography--body1 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #333;
+            margin-bottom: 16px;
+        }
+
+        code {
+            background-color: #f5f5f5;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-family: 'Roboto Mono', monospace;
         }
 
         section {
-            display: none; /* Por defecto todas las secciones están ocultas */
-            width: calc(100vw - 250px - 40px);
+            display: none;
+            /* Por defecto todas las secciones están ocultas */
+            width: calc(100vw - 94px);
             height: calc(100vh);
             padding: 20px;
             position: absolute;
@@ -70,9 +131,73 @@
         }
 
         section.active {
-            display: grid; /* Se mostrará solo la sección activa */
+            display: grid;
+            width: calc(100vw - 94px);
+            /* Se mostrará solo la sección activa */
             justify-content: center;
             align-items: center;
+        }
+
+        .mdc-data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            background-color: #FFFFFF;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .mdc-data-table__header-cell {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500;
+            padding: 16px;
+            background-color: #f5f5f5;
+            border-bottom: 2px solid #e0e0e0;
+            color: #333;
+            text-align: left;
+        }
+
+        .mdc-data-table__cell {
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            padding: 16px;
+            border-bottom: 1px solid #e0e0e0;
+            color: #555;
+            text-align: left;
+        }
+
+        .mdc-data-table__row:hover {
+            background-color: #f1f1f1;
+        }
+
+        .mdc-data-table__header-row {
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        .title-container {
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+        }
+
+        .image-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            gap: 10px;
+            margin-top: 10px;
+            margin-left: 10px;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 50%;
         }
     </style>
 </head>
@@ -80,140 +205,796 @@
 <body>
     <!-- Implementación del Sidebar -->
     <bpt-sidebar items='[
-        { "name": "Modal", "link": "#modal-section" },
-        { "name": "Stepper (in progress)", "link": "#stepper-section" },
-        { "name": "Currency Converter (thousands)", "link": "#currency-converter-1" },
-        { "name": "Currency Converter (millions)", "link": "#currency-converter-2" }
-    ]'></bpt-sidebar>
+        { "name": "Welcome", "link": "#welcome", "icon": "home" },
+        { "name": "Basic", "link": "#basic-components", "icon": "widgets" },
+        { "name": "Forms", "link": "#forms", "icon": "input" },
+        { "name": "Advanced", "link": "#advanced", "icon": "build" },
+        { "name": "Micelanous", "link": "#micelanous", "icon": "style" } 
+    ]' defaultsection="#welcome"></bpt-sidebar>
 
-    <section id="modal-section">
-        <h1>Modal</h1>
-        <!-- Botón para abrir el modal -->
-        <bpt-button-modal modalTrigger="exampleModal">Abrir Modal</bpt-button-modal>
+    <!-- Sección de bienvenida -->
+    <section id="welcome">
+        <div class="title-container">
+            <h1>Welcome</h1>
+            <div class="image-container">
+                <div class="logo"
+                    style="background-image: url('https://media.licdn.com/dms/image/v2/C560BAQEKgeZdPYqfEA/company-logo_200_200/company-logo_200_200/0/1653929400196/pagatodo_logo?e=2147483647&v=beta&t=ds4cOdUseT_AQYHdEI07nYKThDNz5-BU6ypHg3ZSql4');">
+                </div>
+                <div class="logo"
+                    style="background-image: url('https://media.licdn.com/dms/image/v2/D560BAQEV9JukUYDdug/company-logo_200_200/company-logo_200_200/0/1686104929154/yaganaste_logo?e=2147483647&v=beta&t=L81tqWq-sjTUm6o5NhHVcOdQr4lCliEsK-MsNOvOa2o');">
+                </div>
+                <div class="logo"
+                    style="background-image: url('https://play-lh.googleusercontent.com/SKQePjT07ND5BQo3sbhtnTuKx0S_I7EJGL2wcba7bHM1vsaWKUusPLcGXDH22BoMez3D');">
+                </div>
+            </div>
+        </div>
+        <h2>¿Qué son los Web Components en JavaScript Vanilla?</h2>
+        <p class="mdc-typography--body1">
+            Los Web Components son una forma de crear elementos personalizados reutilizables en la web, usando solo
+            JavaScript, HTML y CSS. Piensa en ellos como pequeñas piezas de LEGO que puedes construir y combinar para
+            formar estructuras más grandes y complejas, pero en lugar de construir un castillo, estás construyendo una
+            interfaz/aplicación web.
+        </p>
+        <p class="mdc-typography--body1">
+            Imagina que necesitas una tarjeta personalizada para mostrar información en tu página web. Con Web
+            Components, puedes crear una vez esa tarjeta como un nuevo elemento HTML, y luego reutilizarla en cualquier
+            parte de tu proyecto. Esto no solo te ahorra tiempo, sino que también te ayuda a mantener tu código limpio y
+            organizado.
+        </p>
 
-        <!-- Web Component del Modal -->
-        <bpt-modal modalTriggerName="exampleModal" modal-title="Título del Modal" modal-content="
-            <div class='card'>
-                <h3>Estados Unidos</h3>
-                <bpt-currency-converter locale='US' amount='123456.789'></bpt-currency-converter>
-            </div>">
-            <p>Este componente fue pasado por medio de modal-content</p>
-        </bpt-modal>
+        <!-- Tabla de estado de Web Components -->
+        <h2>Estado de los Web Components</h2>
+        <p class="mdc-typography--body1">
+            <b>Comparto una tabla de componentes que podriamos ir integrando y en los que podemos ir
+                trabajar/colaborar.</b>
+        </p>
+        <table class="mdc-data-table">
+            <thead>
+                <tr class="mdc-data-table__header-row">
+                    <th class="mdc-data-table__header-cell">Web Component</th>
+                    <th class="mdc-data-table__header-cell">Estado</th>
+                </tr>
+            </thead>
+            <tbody class="mdc-data-table__content">
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">Badges</td>
+                    <td class="mdc-data-table__cell">✅</td>
+                </tr>
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">Buttons</td>
+                    <td class="mdc-data-table__cell">✅</td>
+                </tr>
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">Icon Buttons</td>
+                    <td class="mdc-data-table__cell">✅</td>
+                </tr>
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">Modals</td>
+                    <td class="mdc-data-table__cell">🟡</td>
+                </tr>
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">Stepper</td>
+                    <td class="mdc-data-table__cell">🟡</td>
+                </tr>
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">Cards</td>
+                    <td class="mdc-data-table__cell">🟡</td>
+                </tr>
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">Sidebars</td>
+                    <td class="mdc-data-table__cell">🟡</td>
+                </tr>
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">Chips</td>
+                    <td class="mdc-data-table__cell">✅</td>
+                </tr>
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">Currency Converter</td>
+                    <td class="mdc-data-table__cell">✅</td>
+                </tr>
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">Tabs</td>
+                    <td class="mdc-data-table__cell">❌</td>
+                </tr>
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">Accordions</td>
+                    <td class="mdc-data-table__cell">❌</td>
+                </tr>
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">Tooltips</td>
+                    <td class="mdc-data-table__cell">❌</td>
+                </tr>
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">Dialogs</td>
+                    <td class="mdc-data-table__cell">❌</td>
+                </tr>
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">Dropdowns</td>
+                    <td class="mdc-data-table__cell">❌</td>
+                </tr>
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">Day Picker</td>
+                    <td class="mdc-data-table__cell">❌</td>
+                </tr>
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">Time Picker</td>
+                    <td class="mdc-data-table__cell">❌</td>
+                </tr>
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">Slider</td>
+                    <td class="mdc-data-table__cell">❌</td>
+                </tr>
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">Progress Bar</td>
+                    <td class="mdc-data-table__cell">❌</td>
+                </tr>
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">Notifications</td>
+                    <td class="mdc-data-table__cell">❌</td>
+                </tr>
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">Forms</td>
+                    <td class="mdc-data-table__cell">❌</td>
+                </tr>
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">File Upload</td>
+                    <td class="mdc-data-table__cell">❌</td>
+                </tr>
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">Pagination</td>
+                    <td class="mdc-data-table__cell">❌</td>
+                </tr>
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">Tree File Organizer</td>
+                    <td class="mdc-data-table__cell">❌</td>
+                </tr>
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">Black Theme (Dark Mode)</td>
+                    <td class="mdc-data-table__cell">❌</td>
+                </tr>
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">Color Filters for Colorblindness</td>
+                    <td class="mdc-data-table__cell">❌</td>
+                </tr>
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">Screen Reader Compatibility</td>
+                    <td class="mdc-data-table__cell">❌</td>
+                </tr>
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">Keyboard Navigation</td>
+                    <td class="mdc-data-table__cell">❌</td>
+                </tr>
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">Voice Search</td>
+                    <td class="mdc-data-table__cell">❌</td>
+                </tr>
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">Voice Commands</td>
+                    <td class="mdc-data-table__cell">❌</td>
+                </tr>
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">Advanced Search with Filters</td>
+                    <td class="mdc-data-table__cell">❌</td>
+                </tr>
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">Drag and Drop Interface</td>
+                    <td class="mdc-data-table__cell">❌</td>
+                </tr>
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">Real-time Collaboration</td>
+                    <td class="mdc-data-table__cell">❌</td>
+                </tr>
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">Data Visualization (Charts, Graphs)</td>
+                    <td class="mdc-data-table__cell">❌</td>
+                </tr>
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">Notifications with Action Buttons</td>
+                    <td class="mdc-data-table__cell">❌</td>
+                </tr>
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">File Preview (PDF, Images)</td>
+                    <td class="mdc-data-table__cell">❌</td>
+                </tr>
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">Dynamic Form Generation</td>
+                    <td class="mdc-data-table__cell">❌</td>
+                </tr>
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">Customizable Dashboards</td>
+                    <td class="mdc-data-table__cell">❌</td>
+                </tr>
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">Accessibility Widgets (Font size, Contrast)</td>
+                    <td class="mdc-data-table__cell">❌</td>
+                </tr>
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">Voice Narration of Content</td>
+                    <td class="mdc-data-table__cell">❌</td>
+                </tr>
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">Password Strength Meter</td>
+                    <td class="mdc-data-table__cell">❌</td>
+                </tr>
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">Custom File Upload with Progress Bar</td>
+                    <td class="mdc-data-table__cell">❌</td>
+                </tr>
+                <tr class="mdc-data-table__row">
+                    <td class="mdc-data-table__cell">AI-Powered Suggestions</td>
+                    <td class="mdc-data-table__cell">❌</td>
+                </tr>
+            </tbody>
+        </table>
     </section>
 
-    <section id="stepper-section">
-        <h1>Stepper</h1>
+    <!-- Sección de componentes básicos -->
+    <section id="basic-components">
+        <h1>Basic</h1>
+
         <div class="cardWide">
-            <btp-stepper steps="10" stepsCharacter="upper" instruction='[
-            { "text": "Primero, haz esto." },
-            { "text": "Luego, haz aquello." },
-            { "text": "Después, revisa esto." },
-            { "text": "Finalmente, termina el proceso." }]' prevButtonText="Anterior" nextButtonText="Siguiente"
-                finishButtonText="Finalizar"></btp-stepper>
+            <h2>
+                <span class="material-symbols-outlined">view_module</span>
+                Chips
+            </h2>
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <!-- Chip with an icon on the left -->
+                <bpt-chip content="Assist" icon-position="left">
+                    <span slot="icon" class="material-symbols-outlined">calendar_today</span>
+                </bpt-chip>
+
+                <!-- Chip with an icon on the right -->
+                <bpt-chip content="Filter" icon-position="right" mode="focus-toggle" waves="rgba(0, 150, 136, 0.2)">
+                    <span slot="icon" class="material-symbols-outlined">check</span>
+                </bpt-chip>
+
+                <!-- Chip with a close icon -->
+                <bpt-chip content="Input" mode="close" waves="rgba(255, 255, 255, 0.3)">
+                    <span slot="icon" class="material-symbols-outlined">close</span>
+                </bpt-chip>
+
+                <bpt-chip content="Input" mode="close" icon-position="right" active="false"
+                    waves="rgba(255, 255, 255, 0.3)">
+                    <span slot="icon" class="material-symbols-outlined">close</span>
+                </bpt-chip>
+
+                <!-- Simple chip with no icon -->
+                <bpt-chip content="Suggestion"></bpt-chip>
+            </div>
         </div>
 
         <div class="cardWide">
-            <btp-stepper steps="7" stepsCharacter="lower" instruction='[
-            { "text": "Primero, haz esto." },
-            { "text": "Luego, haz aquello." },
-            { "text": "Después, revisa esto." },
-            { "text": "Finalmente, termina el proceso." }]' prevButtonText="Anterior personalizado"
-                nextButtonText="Siguiente personalizado" finishButtonText="Finalizar personalizado"></btp-stepper>
+            <h2>
+                <span class="material-symbols-outlined">badge</span>
+                Badges
+            </h2>
+            <div>
+                <!-- Icon with a red dot (not-available) -->
+                <bpt-badge state="not-available" label="Label">
+                    <span slot="icon" class="material-symbols-outlined">warning</span>
+                </bpt-badge>
+
+                <!-- Icon with a green dot (available) -->
+                <bpt-badge state="available" label="Label">
+                    <span slot="icon" class="material-symbols-outlined">check_circle</span>
+                </bpt-badge>
+
+                <!-- Icon with a goldenrod dot (pending) -->
+                <bpt-badge state="pending" label="Label">
+                    <span slot="icon" class="material-symbols-outlined">hourglass_empty</span>
+                </bpt-badge>
+
+                <!-- Icon with a warm gray dot (disconnected) -->
+                <bpt-badge state="disconnected" label="Label">
+                    <span slot="icon" class="material-symbols-outlined">cloud_off</span>
+                </bpt-badge>
+
+                <!-- Icon with a badge number -->
+                <bpt-badge number="5" label="Label">
+                    <span slot="icon" class="material-symbols-outlined">notifications</span>
+                </bpt-badge>
+
+                <!-- Icon with a badge number and a limit -->
+                <bpt-badge number="105" limit="99" label="Label">
+                    <span slot="icon" class="material-symbols-outlined">mail</span>
+                </bpt-badge>
+
+                <!-- Icon with a badge number and no label -->
+                <bpt-badge number="11" limit="10">
+                    <span slot="icon" class="material-symbols-outlined">chat</span>
+                </bpt-badge>
+
+                <!-- Icon with no state, label, or number (default icon only) -->
+                <bpt-badge>
+                    <span slot="icon" class="material-symbols-outlined">info</span>
+                </bpt-badge>
+            </div>
         </div>
 
         <div class="cardWide">
-            <btp-stepper steps="5" stepsCharacter="number" instruction='[
-            { "text": "Primero, haz esto." },
-            { "text": "Luego, haz aquello." },
-            { "text": "Después, revisa esto." },
-            { "text": "Finalmente, termina el proceso." }]' prevButtonText="Anterior personalizado"
-                nextButtonText="Siguiente personalizado" finishButtonText="Finalizar personalizado"></btp-stepper>
+            <h2>
+                <span class="material-symbols-outlined">smart_button</span>
+                Buttons
+            </h2>
+            <div>
+                <!-- Elevated Button with Material Symbol Icon -->
+                <bpt-button mode="elevated">
+                    <span class="material-symbols-outlined">add</span>
+                    Elevated
+                </bpt-button>
+
+                <!-- Filled Button with Material Symbol Icon -->
+                <bpt-button mode="filled">
+                    <span class="material-symbols-outlined">check_circle</span>
+                    Filled
+                </bpt-button>
+
+                <!-- Filled Tonal Button with Material Symbol Icon -->
+                <bpt-button mode="filled-tonal">
+                    <span class="material-symbols-outlined">star</span>
+                    Tonal
+                </bpt-button>
+
+                <!-- Outlined Button with Material Symbol Icon -->
+                <bpt-button mode="outlined">
+                    <span class="material-symbols-outlined">info</span>
+                    Outlined
+                </bpt-button>
+
+                <!-- Text Button with Material Symbol Icon -->
+                <bpt-button mode="text" waves="rgba(0, 0, 0, 0.2)">
+                    <span class="material-symbols-outlined">favorite</span>
+                    Text
+                </bpt-button>
+
+                <bpt-button mode="elevated" waves="rgba(0, 0, 0, 0.2)">
+                    <span class="material-symbols-outlined">add</span>
+                    Elevated
+                </bpt-button>
+
+                <bpt-button mode="filled" waves="rgba(255, 255, 255, 0.3)">
+                    <span class="material-symbols-outlined">check_circle</span>
+                    Filled
+                </bpt-button>
+
+                <bpt-button mode="outlined" waves="rgba(3, 169, 244, 0.3)">
+                    <span class="material-symbols-outlined">info</span>
+                    Outlined
+                </bpt-button>
+            </div>
         </div>
 
         <div class="cardWide">
-            <btp-stepper steps="3" stepsCharacter="number" instruction='[
-            { "text": "Primero, haz esto." },
-            { "text": "Luego, haz aquello." },
-            { "text": "Después, revisa esto." },
-            { "text": "Finalmente, termina el proceso." }]' prevButtonText="Anterior personalizado"
-                nextButtonText="Siguiente personalizado" finishButtonText="Finalizar personalizado"></btp-stepper>
+            <h2>
+                <span class="material-symbols-outlined">radio_button_checked</span>
+                Icon Buttons
+            </h2>
+            <div>
+                <!-- Elevated Icon Button (Regular use) -->
+                <bpt-icon-button mode="elevated" waves="rgba(0, 150, 136, 0.2)">
+                    <span class="material-symbols-outlined">add</span>
+                </bpt-icon-button>
+
+                <!-- Filled Icon Button (Top-Right Fixed) -->
+                <bpt-icon-button mode="filled" fixed="true" position-top="20px" position-right="20px"
+                    waves="rgba(255, 255, 255, 0.3)">
+                    <span class="material-symbols-outlined">favorite</span>
+                </bpt-icon-button>
+
+                <!-- Outlined Icon Button (Bottom-Right Fixed) -->
+                <bpt-icon-button mode="outlined" waves="rgba(255, 255, 255, 0.3)">
+                    <span class="material-symbols-outlined">edit</span>
+                </bpt-icon-button>
+
+                <!-- Text Icon Button (Bottom-Left Fixed) -->
+                <bpt-icon-button mode="text" waves="rgba(0, 150, 136, 0.2)">
+                    <span class="material-symbols-outlined">share</span>
+                </bpt-icon-button>
+
+                <!-- Large Elevated Icon Button with Pulse (Regular use) -->
+                <bpt-icon-button mode="elevated" large waves="rgba(0, 150, 136, 0.2)">
+                    <span class="material-symbols-outlined">add</span>
+                </bpt-icon-button>
+
+                <!-- Large Filled Icon Button with Pulse (Top-Right Fixed) -->
+                <bpt-icon-button mode="filled" fixed="true" position-bottom="20px" position-right="20px" large pulse
+                    waves="rgba(255, 255, 255, 0.3)">
+                    <span class="material-symbols-outlined">favorite</span>
+                </bpt-icon-button>
+
+                <!-- Large Outlined Icon Button with Pulse (Bottom-Right Fixed) -->
+                <bpt-icon-button mode="outlined" large waves="rgba(255, 255, 255, 0.3)">
+                    <span class="material-symbols-outlined">edit</span>
+                </bpt-icon-button>
+
+                <!-- Large Text Icon Button with Pulse (Bottom-Left Fixed) -->
+                <bpt-icon-button mode="text" large waves="rgba(0, 150, 136, 0.2)">
+                    <span class="material-symbols-outlined">share</span>
+                </bpt-icon-button>
+            </div>
+        </div>
+
+        <div class="cardWide">
+            <h2>
+                <span class="material-symbols-outlined">view_quilt</span>
+                Cards
+            </h2>
+            <div
+                style="width: 100%; display: grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows: auto; gap: 10px; margin: 10px 0;">
+                <bpt-card-basic mode="elevated" title="Elevated" subtitle="SubTitle"
+                    content="This is an elevated card.">
+                    <bpt-icon-button slot="icon" mode="text" waves="rgba(255, 255, 255, 0.3)">
+                        <span class="material-symbols-outlined">more_vert</span>
+                    </bpt-icon-button>
+                </bpt-card-basic>
+
+                <bpt-card-basic mode="filled" title="Filled" subtitle="SubTitle" content="This is a filled card.">
+                    <bpt-icon-button slot="icon" mode="filled" waves="rgba(255, 255, 255, 0.3)">
+                        <span class="material-symbols-outlined">favorite</span>
+                    </bpt-icon-button>
+                </bpt-card-basic>
+
+                <bpt-card-basic mode="outlined" title="Outlined" subtitle="SubTitle"
+                    content="This is an outlined card.">
+                    <bpt-icon-button slot="icon" mode="filled" waves="rgba(255, 255, 255, 0.3)">
+                        <span class="material-symbols-outlined">favorite</span>
+                    </bpt-icon-button>
+                </bpt-card-basic>
+
+                <bpt-card-basic mode="elevated" title="Elevated" subtitle="SubTitle" content="
+                    <bpt-button mode='filled' waves='rgba(255, 255, 255, 0.3)'>
+                        <span class='material-symbols-outlined'>check_circle</span>
+                        Filled
+                    </bpt-button>
+                    ">
+                </bpt-card-basic>
+
+                <bpt-card-basic mode="filled" title="Filled" subtitle="SubTitle" content="
+                    <bpt-button mode='filled' waves='rgba(255, 255, 255, 0.3)'>
+                        <span class='material-symbols-outlined'>check_circle</span>
+                        Filled
+                    </bpt-button>
+                    ">
+                </bpt-card-basic>
+
+                <bpt-card-basic mode="outlined" title="Outlined" subtitle="SubTitle" content="
+                    <bpt-button mode='filled' waves='rgba(255, 255, 255, 0.3)'>
+                        <span class='material-symbols-outlined'>check_circle</span>
+                        Filled
+                    </bpt-button>
+                    ">
+                </bpt-card-basic>
+            </div>
+
+            <!-- Card with image, fixed background, title, subtitle, and custom icon -->
+            <div
+                style="width: 100%; display: grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows: auto; gap: 10px;">
+                <bpt-card-image mode="elevated" title="Glass Souls' World Tour" subtitle="From your recent favorites"
+                    content="
+                    <bpt-button mode='filled' waves='rgba(255, 255, 255, 0.3)'>
+                        <span class='material-symbols-outlined'>check_circle</span>
+                        Buy Now
+                    </bpt-button>"
+                    image="https://images.unsplash.com/photo-1705083526543-bb17c2879597?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    fixed-image="true">
+                    <span slot="icon" class="material-symbols-outlined">favorite</span>
+                </bpt-card-image>
+
+                <!-- Card with image, title, and subtitle -->
+                <bpt-card-image mode="filled" title="Upcoming Concert" subtitle="Get ready for the event of the year"
+                    content="
+                    <bpt-button mode='filled' waves='rgba(255, 255, 255, 0.3)'>
+                        <span class='material-symbols-outlined'>event</span>
+                        Add to Calendar
+                    </bpt-button>"
+                    image="https://images.unsplash.com/photo-1610046984556-5ec0acda645f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTU5fHxibHVlfGVufDB8fDB8fHww">
+                    <span slot="icon" class="material-symbols-outlined">star</span>
+                </bpt-card-image>
+
+                <bpt-card-image mode="outlined" title="Card Title" subtitle="Card Subtitle" content="
+                        <bpt-button mode='filled' waves='rgba(255, 255, 255, 0.3)'>
+                            <span class='material-symbols-outlined'>check_circle</span>
+                            Filled
+                        </bpt-button>"
+                    image="https://images.unsplash.com/photo-1640537072339-a5a28201bcd8?q=80&w=1979&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+                    <bpt-icon-button slot="icon-button" mode="filled" waves="rgba(255, 255, 255, 0.3)">
+                        <span class="material-symbols-outlined">favorite</span>
+                    </bpt-icon-button>
+                    <!-- Contenido adicional si es necesario -->
+                </bpt-card-image>
+            </div>
         </div>
     </section>
 
-    <section id="currency-converter-1">
-        <h1>Currency converter 1</h1>
-        <div class="grid-container">
-            <div class="card">
-                <h3>Estados Unidos</h3>
-                <bpt-currency-converter locale="US" amount="123456.789"></bpt-currency-converter>
-            </div>
-            <div class="card">
-                <h3>Ecuador</h3>
-                <bpt-currency-converter locale="EC" amount="123456.789"></bpt-currency-converter>
-            </div>
-            <div class="card">
-                <h3>Perú</h3>
-                <bpt-currency-converter locale="PE" amount="123456.789"></bpt-currency-converter>
-            </div>
-            <div class="card">
-                <h3>México</h3>
-                <bpt-currency-converter locale="MX" amount="123456.789"></bpt-currency-converter>
-            </div>
-            <div class="card">
-                <h3>Chile</h3>
-                <bpt-currency-converter locale="CL" amount="123456.789"></bpt-currency-converter>
-            </div>
-            <div class="card">
-                <h3>España</h3>
-                <bpt-currency-converter locale="ES" amount="123456.789"></bpt-currency-converter>
-            </div>
-            <div class="card">
-                <h3>Argentina</h3>
-                <bpt-currency-converter locale="AR" amount="123456.789"></bpt-currency-converter>
-            </div>
-            <div class="card">
-                <h3>Colombia</h3>
-                <bpt-currency-converter locale="CO" amount="3500.789"></bpt-currency-converter>
-            </div>
-        </div>
+    <!-- Sección de formularios -->
+    <section id="forms">
+        <h1>Forms</h1>
+        <!-- Aquí no hay contenido aún -->
     </section>
 
-    <section id="currency-converter-2">
-        <h1>Currency converter 2</h1>
-        <div class="grid-container">
-            <div class="card">
-                <h3>Estados Unidos</h3>
-                <bpt-currency-converter locale="US" amount="123456789.99"></bpt-currency-converter>
-            </div>
-            <div class="card">
-                <h3>Ecuador</h3>
-                <bpt-currency-converter locale="EC" amount="1000000.12"></bpt-currency-converter>
-            </div>
-            <div class="card">
-                <h3>Perú</h3>
-                <bpt-currency-converter locale="PE" amount="2345678901.56"></bpt-currency-converter>
-            </div>
-            <div class="card">
-                <h3>México</h3>
-                <bpt-currency-converter locale="MX" amount="7654321098.34"></bpt-currency-converter>
-            </div>
-            <div class="card">
-                <h3>Chile</h3>
-                <bpt-currency-converter locale="CL" amount="3456789123.89"></bpt-currency-converter>
-            </div>
-            <div class="card">
-                <h3>España</h3>
-                <bpt-currency-converter locale="ES" amount="1234567890.67"></bpt-currency-converter>
-            </div>
-            <div class="card">
-                <h3>Argentina</h3>
-                <bpt-currency-converter locale="AR" amount="9876543210.99"></bpt-currency-converter>
-            </div>
-            <div class="card">
-                <h3>Colombia</h3>
-                <bpt-currency-converter locale="CO" amount="123456789012.34"></bpt-currency-converter>
+    <!-- Sección avanzada -->
+    <section id="advanced">
+        <h1>Advanced</h1>
+
+        <div class="cardWide">
+            <h2>
+                <span class="material-symbols-outlined">open_in_new</span>
+                Modal
+            </h2>
+            <div style="width: 100%;">
+                <!-- Botón para abrir el modal -->
+                <bpt-button-modal mode="elevated" waves="rgba(0, 0, 0, 0.2)" modalTrigger="exampleModal">
+                    <span class="material-symbols-outlined">window</span>
+                    Modal open
+                </bpt-button-modal>
+
+                <bpt-button-modal mode="elevated" waves="rgba(0, 0, 0, 0.2)" modalTrigger="exampleModal2">
+                    <span class="material-symbols-outlined">window</span>
+                    Modal open
+                </bpt-button-modal>
+
+                <!-- Web Component del Modal -->
+                <bpt-modal modalTriggerName="exampleModal" modal-title="Título del Modal" modal-content="
+                        <div class='card'>
+                            <h3>Estados Unidos</h3>
+                            <bpt-currency-converter locale='US' amount='123456.789'></bpt-currency-converter>
+                        </div>
+                        <br>">
+                    <div slot="footer">
+                        <bpt-button mode="text" waves="rgba(0, 0, 0, 0.2)">
+                            <span class="material-symbols-outlined">favorite</span>
+                            Text button
+                        </bpt-button>
+                        <bpt-button mode="text" waves="rgba(0, 0, 0, 0.2)">
+                            <span class="material-symbols-outlined">favorite</span>
+                            Text button
+                        </bpt-button>
+                    </div>
+                </bpt-modal>
+
+                <!-- Web Component del Modal -->
+                <bpt-modal modalTriggerName="exampleModal2" modal-title="Título del Modal" modal-content="
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Error veniam dolore libero, eveniet consectetur architecto, ab exercitationem voluptatum soluta consequuntur corrupti quasi quod voluptates illum omnis magni facilis ipsum totam.
+                    Totam odio repudiandae vero! Rerum, assumenda! Cum corrupti unde amet obcaecati alias molestiae nam voluptas in quos. Voluptate officia nulla molestiae quis quas dolorem atque, necessitatibus dolore magni maiores minima.
+                    Voluptas sint fuga distinctio corporis ipsam veniam id velit, dignissimos eveniet quas harum et quidem voluptatibus libero ad in perspiciatis neque rerum, consequatur praesentium tempora! Delectus porro voluptatibus odio necessitatibus.
+                    Rem est consequatur ipsam dicta quo. Blanditiis totam excepturi non facilis temporibus placeat et reiciendis repellendus quibusdam odit magnam assumenda, eligendi mollitia, fugiat aut distinctio quo ut nam ab eveniet.
+                    Laboriosam porro incidunt at reprehenderit voluptatum deleniti numquam! Sit in voluptates itaque, rerum ea perspiciatis tempore doloribus nulla repudiandae aperiam corrupti culpa fugiat, nobis deserunt exercitationem, doloremque cum. Explicabo, aliquid.
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Error veniam dolore libero, eveniet consectetur architecto, ab exercitationem voluptatum soluta consequuntur corrupti quasi quod voluptates illum omnis magni facilis ipsum totam.
+                    Totam odio repudiandae vero! Rerum, assumenda! Cum corrupti unde amet obcaecati alias molestiae nam voluptas in quos. Voluptate officia nulla molestiae quis quas dolorem atque, necessitatibus dolore magni maiores minima.
+                    Voluptas sint fuga distinctio corporis ipsam veniam id velit, dignissimos eveniet quas harum et quidem voluptatibus libero ad in perspiciatis neque rerum, consequatur praesentium tempora! Delectus porro voluptatibus odio necessitatibus.
+                    Rem est consequatur ipsam dicta quo. Blanditiis totam excepturi non facilis temporibus placeat et reiciendis repellendus quibusdam odit magnam assumenda, eligendi mollitia, fugiat aut distinctio quo ut nam ab eveniet.
+                    Laboriosam porro incidunt at reprehenderit voluptatum deleniti numquam! Sit in voluptates itaque, rerum ea perspiciatis tempore doloribus nulla repudiandae aperiam corrupti culpa fugiat, nobis deserunt exercitationem, doloremque cum. Explicabo, aliquid.
+                    ">
+                    <div slot="footer">
+                        <bpt-button mode="text" waves="rgba(0, 0, 0, 0.2)">
+                            <span class="material-symbols-outlined">favorite</span>
+                            Text button
+                        </bpt-button>
+                        <bpt-button mode="text" waves="rgba(0, 0, 0, 0.2)">
+                            <span class="material-symbols-outlined">favorite</span>
+                            Text button
+                        </bpt-button>
+                    </div>
+                </bpt-modal>
             </div>
         </div>
+
+        <div class="cardWide">
+            <h2>
+                <span class="material-symbols-outlined">directions_walk</span>
+                Stepper
+            </h2>
+            <div
+                style="width: 100%; gap: 20px; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+                <!-- Ejemplo 1: Stepper con 3 pasos, con jump activado -->
+                <h3>Ejemplo 1: Stepper con 3 pasos, con jump activado</h3>
+                <btp-stepper steps="3" stepsCharacter="lower" instruction='[
+                        { "text": "Primero, haz esto." },
+                        { "text": "Luego, haz aquello." },
+                        { "text": "Después, revisa esto." }]' jump="true">
+
+                    <!-- Botón anterior personalizado -->
+                    <bpt-button slot="prev-btn" icon-position="right" mode="elevated">
+                        <span class="material-symbols-outlined">arrow_back</span>
+                        Anterior
+                    </bpt-button>
+
+                    <!-- Botón siguiente personalizado -->
+                    <bpt-button slot="next-btn" icon-position="left" mode="elevated">
+                        <span class="material-symbols-outlined">arrow_forward</span>
+                        Siguiente
+                    </bpt-button>
+                </btp-stepper>
+
+                <!-- Ejemplo 2: Stepper con 10 pasos, jump activado, y conectores visibles -->
+                <h3>Ejemplo 2: Stepper con 10 pasos, jump activado, y conectores visibles</h3>
+                <btp-stepper steps="10" stepsCharacter="number" instruction='[
+                        { "text": "Primero, haz esto." },
+                        { "text": "Luego, haz aquello." },
+                        { "text": "Después, revisa esto." }]' jump="true">
+
+                    <bpt-button slot="prev-btn" mode="outlined">
+                        <span class="material-symbols-outlined">arrow_back</span>
+                        Anterior
+                    </bpt-button>
+                    <bpt-button slot="next-btn" mode="outlined">
+                        <span class="material-symbols-outlined">arrow_forward</span>
+                        Siguiente
+                    </bpt-button>
+                </btp-stepper>
+
+                <!-- Ejemplo 3: Stepper con 10 pasos, sin conectores, y jump activado -->
+                <h3>Ejemplo 3: Stepper con 10 pasos, sin conectores, y jump activado</h3>
+                <btp-stepper steps="10" stepsCharacter="number" show-connector="false" instruction='[
+                        { "text": "Primero, haz esto." },
+                        { "text": "Luego, haz aquello." },
+                        { "text": "Después, revisa esto." }]' jump="true">
+
+                    <bpt-button slot="prev-btn" mode="outlined">
+                        <span class="material-symbols-outlined">arrow_back</span>
+                        Anterior
+                    </bpt-button>
+                    <bpt-button slot="next-btn" mode="outlined">
+                        <span class="material-symbols-outlined">arrow_forward</span>
+                        Siguiente
+                    </bpt-button>
+                </btp-stepper>
+
+                <!-- Ejemplo 4: Stepper con 3 pasos, sin jump, con conectores visibles -->
+                <h3>Ejemplo 4: Stepper con 3 pasos, sin jump, con conectores visibles</h3>
+                <btp-stepper steps="3" stepsCharacter="number" instruction='[
+                        { "text": "Primero, haz esto." },
+                        { "text": "Luego, haz aquello." },
+                        { "text": "Después, revisa esto." }]'>
+                    <!-- Botón anterior personalizado -->
+                    <bpt-button slot="prev-btn" icon-position="right" mode="elevated">
+                        <span class="material-symbols-outlined">arrow_back</span>
+                        Anterior
+                    </bpt-button>
+
+                    <!-- Botón siguiente personalizado -->
+                    <bpt-button slot="next-btn" icon-position="left" mode="elevated">
+                        <span class="material-symbols-outlined">arrow_forward</span>
+                        Siguiente
+                    </bpt-button>
+                </btp-stepper>
+
+                <!-- Ejemplo 5: Stepper con 5 pasos, con jump y conectores -->
+                <h3>Ejemplo 5: Stepper con 5 pasos, con jump y conectores</h3>
+                <btp-stepper steps="5" stepsCharacter="number" instruction='[
+                        { "text": "Paso 1." },
+                        { "text": "Paso 2." },
+                        { "text": "Paso 3." },
+                        { "text": "Paso 4." },
+                        { "text": "Paso 5." }]' jump="true">
+
+                    <!-- Botón anterior -->
+                    <bpt-button slot="prev-btn" mode="outlined">
+                        <span class="material-symbols-outlined">arrow_back</span>
+                        Anterior
+                    </bpt-button>
+
+                    <!-- Botón siguiente -->
+                    <bpt-button slot="next-btn" mode="outlined">
+                        <span class="material-symbols-outlined">arrow_forward</span>
+                        Siguiente
+                    </bpt-button>
+                </btp-stepper>
+
+                <!-- Ejemplo 6: Stepper con 7 pasos, sin jump, sin conectores -->
+                <h3>Ejemplo 6: Stepper con 7 pasos, sin jump, sin conectores</h3>
+                <btp-stepper steps="7" stepsCharacter="upper" show-connector="false" instruction='[
+                        { "text": "Primero, haz esto." },
+                        { "text": "Luego, haz aquello." },
+                        { "text": "Después, revisa esto." },
+                        { "text": "Paso 4." },
+                        { "text": "Paso 5." },
+                        { "text": "Paso 6." },
+                        { "text": "Paso 7." }]'>
+                    <!-- Botón anterior -->
+                    <bpt-button slot="prev-btn" mode="elevated">
+                        <span class="material-symbols-outlined">arrow_back</span>
+                        Anterior
+                    </bpt-button>
+
+                    <!-- Botón siguiente -->
+                    <bpt-button slot="next-btn" mode="elevated">
+                        <span class="material-symbols-outlined">arrow_forward</span>
+                        Siguiente
+                    </bpt-button>
+                </btp-stepper>
+
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Currency Converter Sections -->
+    <section id="micelanous">
+        <h1>Micelanous</h1>
+
+        <div class="cardWide">
+            <h2>
+                <span class="material-symbols-outlined">attach_money</span>
+                Currency converter 1
+            </h2>
+            <div class="grid-container">
+                <div class="card">
+                    <h3>Estados Unidos</h3>
+                    <bpt-currency-converter locale="US" amount="123456.789"></bpt-currency-converter>
+                </div>
+                <div class="card">
+                    <h3>Ecuador</h3>
+                    <bpt-currency-converter locale="EC" amount="123456.789"></bpt-currency-converter>
+                </div>
+                <div class="card">
+                    <h3>Perú</h3>
+                    <bpt-currency-converter locale="PE" amount="123456.789"></bpt-currency-converter>
+                </div>
+                <div class="card">
+                    <h3>México</h3>
+                    <bpt-currency-converter locale="MX" amount="123456.789"></bpt-currency-converter>
+                </div>
+                <div class="card">
+                    <h3>Chile</h3>
+                    <bpt-currency-converter locale="CL" amount="123456.789"></bpt-currency-converter>
+                </div>
+                <div class="card">
+                    <h3>España</h3>
+                    <bpt-currency-converter locale="ES" amount="123456.789"></bpt-currency-converter>
+                </div>
+                <div class="card">
+                    <h3>Argentina</h3>
+                    <bpt-currency-converter locale="AR" amount="123456.789"></bpt-currency-converter>
+                </div>
+                <div class="card">
+                    <h3>Colombia</h3>
+                    <bpt-currency-converter locale="CO" amount="3500.789"></bpt-currency-converter>
+                </div>
+            </div>
+        </div>
+
+        <div class="cardWide">
+            <h2>
+                <span class="material-symbols-outlined">euro_symbol</span>
+                Currency converter 2
+            </h2>
+            <div class="grid-container">
+                <div class="card">
+                    <h3>Estados Unidos</h3>
+                    <bpt-currency-converter locale="US" amount="123456789.99"></bpt-currency-converter>
+                </div>
+                <div class="card">
+                    <h3>Ecuador</h3>
+                    <bpt-currency-converter locale="EC" amount="1000000.12"></bpt-currency-converter>
+                </div>
+                <div class="card">
+                    <h3>Perú</h3>
+                    <bpt-currency-converter locale="PE" amount="2345678901.56"></bpt-currency-converter>
+                </div>
+                <div class="card">
+                    <h3>México</h3>
+                    <bpt-currency-converter locale="MX" amount="7654321098.34"></bpt-currency-converter>
+                </div>
+                <div class="card">
+                    <h3>Chile</h3>
+                    <bpt-currency-converter locale="CL" amount="3456789123.89"></bpt-currency-converter>
+                </div>
+                <div class="card">
+                    <h3>España</h3>
+                    <bpt-currency-converter locale="ES" amount="1234567890.67"></bpt-currency-converter>
+                </div>
+                <div class="card">
+                    <h3>Argentina</h3>
+                    <bpt-currency-converter locale="AR" amount="9876543210.99"></bpt-currency-converter>
+                </div>
+                <div class="card">
+                    <h3>Colombia</h3>
+                    <bpt-currency-converter locale="CO" amount="123456789012.34"></bpt-currency-converter>
+                </div>
+            </div>
+        </div>
+
     </section>
 
     <script>
